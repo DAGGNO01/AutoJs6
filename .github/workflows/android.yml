@@ -28,11 +28,11 @@ jobs:
         run: echo "cmake.dir=$ANDROID_HOME/cmake/3.10.2.4988404" >> local.properties
         
       - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-
+        run: chmod +x gradle
+        
       - name: Build with Gradle (assembleInrtRelease)
-        run: ./gradlew assembleInrtRelease
-
+        run: ./gradlew assembleInrtRelease --info
+        
       - name: Build with Gradle (assembleAppRelease)
         run: ./gradlew assembleAppRelease
 
