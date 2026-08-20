@@ -22,7 +22,7 @@ jobs:
           
       - name: Install CMake 3.10.2
         run: |
-        yes | sdkmanager "cmake;3.10.2.4988404"
+          yes | sdkmanager "cmake;3.10.2.4988404"
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
