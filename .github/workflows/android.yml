@@ -2,9 +2,9 @@ name: Android CI
 
 on:
   push:
-    branches: [ "master", "6.5.0"  ]
+    branches: [ "master", "6.5.0" ]
   pull_request:
-    branches: [ "master", "6.5.0"  ]
+    branches: [ "master", "6.5.0" ]
 
 jobs:
   build:
@@ -19,29 +19,66 @@ jobs:
           java-version: '20'
           distribution: 'temurin'
           cache: gradle
-          
+
       - name: Install CMake 3.10.2
         run: |
           yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "cmake;3.10.2.4988404" || true
 
       - name: Configure CMake
         run: echo "cmake.dir=$ANDROID_HOME/cmake/3.10.2.4988404" >> local.properties
-      
+
       - name: Grant execute permission for gradlew
-        run: chmod +x gradle
-        
+        run: chmod +x gradlew
+
       - name: Build with Gradle (assembleInrtRelease)
         run: ./gradlew assembleInrtRelease
-        
+
       - name: Build with Gradle (assembleAppRelease)
         run: ./gradlew assembleAppRelease
+
+      - name: Sign APKs
+        run: |
+          BUILD_TOOLS="${ANDROID_HOME}/build-tools/$(ls "${ANDROID_HOME}/build-tools" | sort -V | tail -1)"
+
+          keytool -genkeypair \
+            -v \
+            -keystore test-release.jks \
+            -alias autojs \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 10000 \
+            -storepass android \
+            -keypass android \
+            -dname "CN=AutoJs"
+
+          mkdir -p signed
+
+          for apk in app/build/outputs/apk/app/release/*.apk; do
+            name=$(basename "$apk")
+
+            "$BUILD_TOOLS/zipalign" \
+              -f 4 \
+              "$apk" \
+              "aligned-$name"
+
+            "$BUILD_TOOLS/apksigner" sign \
+              --ks test-release.jks \
+              --ks-pass pass:android \
+              --key-pass pass:android \
+              --out "signed/$name" \
+              "aligned-$name"
+
+            "$BUILD_TOOLS/apksigner" verify \
+              --verbose \
+              "signed/$name"
+          done
 
       - name: Upload arm64 artifacts
         id: upload-arm64-apk
         uses: actions/upload-artifact@v4
         with:
           name: release-arm64-apk
-          path: app/build/outputs/apk/app/release/*-arm64-v8a.apk
+          path: signed/*-arm64-v8a.apk
         continue-on-error: true
 
       - name: Upload armv7 artifacts
@@ -49,7 +86,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: release-armv7-apk
-          path: app/build/outputs/apk/app/release/*-v7a.apk
+          path: signed/*-v7a.apk
         continue-on-error: true
 
       - name: Upload universal artifacts
@@ -57,5 +94,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: release-universal-apk
-          path: app/build/outputs/apk/app/release/*-universal.apk
+          path: signed/*-universal.apk
         continue-on-error: true
