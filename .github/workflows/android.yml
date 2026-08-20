@@ -27,13 +27,6 @@ jobs:
       - name: Configure CMake
         run: echo "cmake.dir=$ANDROID_HOME/cmake/3.10.2.4988404" >> local.properties
       
-      - name: Download RootShell
-        run: |
-          mkdir -p app/libs
-          curl -fL -o app/libs/RootShell-1.6.aar "https://repo1.maven.org/maven2/com/github/Stericson/RootShell/1.6/RootShell-1.6.aar"
-          file app/libs/RootShell-1.6.aar
-          ls -lh app/libs/RootShell-1.6.aar
-     
       - name: Grant execute permission for gradlew
         run: chmod +x gradle
         
