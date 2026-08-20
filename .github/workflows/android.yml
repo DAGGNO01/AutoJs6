@@ -39,7 +39,7 @@ jobs:
 
       - name: Upload armv7 artifacts
         id: upload-armv7-apk
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: release-armv7-apk
           path: app/build/outputs/apk/app/release/*-v7a.apk
@@ -47,7 +47,7 @@ jobs:
 
       - name: Upload universal artifacts
         id: upload-universal-apk
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: release-universal-apk
           path: app/build/outputs/apk/app/release/*-universal.apk
