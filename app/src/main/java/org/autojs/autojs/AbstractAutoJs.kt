@@ -34,8 +34,8 @@ import org.autojs.autojs.util.ResourceMonitor
 import org.autojs.autojs.util.ResourceMonitor.UnclosedResourceException
 import org.autojs.autojs.util.StringUtils
 import org.autojs.autojs.util.ViewUtils
-import org.autojs.autojs6.BuildConfig
-import org.autojs.autojs6.R
+import com.f001.oh.BuildConfig
+import com.f001.oh.R
 import org.mozilla.javascript.ContextFactory
 import org.mozilla.javascript.WrappedException
 import java.io.File
