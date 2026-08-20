@@ -438,6 +438,16 @@ pluginManagement {
 
     }
 
+    dependencyResolutionManagement {
+        repositories {
+            google()
+            mavenCentral()
+            maven("https://jitpack.io")
+        }
+    }
+
+
+
     plugins {
 
         arrayOf("com.google.devtools.ksp", kotlinMap, false).let { data ->
