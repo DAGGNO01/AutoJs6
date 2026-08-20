@@ -22,8 +22,12 @@ jobs:
           
       - name: Install CMake 3.10.2
         run: |
-          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "cmake;3.10.2.4988404"
-          ls -la "$ANDROID_HOME/cmake/3.10.2"
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "cmake;3.10.2.4988404" || true
+          echo "=== CMake directories ==="
+          find "$ANDROID_HOME" -maxdepth 4 -type d -iname "*cmake*" -print
+          echo "=== CMake executable ==="
+          find "$ANDROID_HOME" -type f -name cmake -print
+      
       
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
