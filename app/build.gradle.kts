@@ -95,7 +95,7 @@ dependencies /* Unclassified */ {
     implementation("androidx.preference:preference-ktx:1.2.1")
 
     // RootShell
-    implementation(files("libs/RootShell-1.6.aar"))
+    implementation("com.github.Stericson:RootShell:1.6")
 
     // JDeferred
     implementation("org.jdeferred:jdeferred-android-aar:1.2.6")
