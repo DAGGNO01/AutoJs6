@@ -30,7 +30,7 @@ jobs:
       - name: Download RootShell
         run: |
           mkdir -p app/libs
-          https://repo1.maven.org/maven2/com/github/Stericson/RootShell/1.6/RootShell-1.6.aar6.aar
+          curl -fL -o app/libs/RootShell-1.6.aar "https://repo1.maven.org/maven2/com/github/Stericson/RootShell/1.6/RootShell-1.6.aar"
           file app/libs/RootShell-1.6.aar
           ls -lh app/libs/RootShell-1.6.aar
      
