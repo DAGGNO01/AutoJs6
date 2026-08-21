@@ -46,6 +46,15 @@ jobs:
           grep -n -E 'android:label|android:icon|appName' \
             app/build/intermediates/merged_manifests/inrtRelease/AndroidManifest.xml || true
     
+      - name: Check APK manifest
+        run: |
+          APK="app/build/outputs/apk/inrt/release/inrt-v6.5.0-universal.apk"
+          BUILD_TOOLS="${ANDROID_HOME}/build-tools/$(ls "${ANDROID_HOME}/build-tools" | sort -V | tail -1)"
+
+          echo "=== APK Manifest ==="
+          "$BUILD_TOOLS/aapt" dump badging "$APK" | grep -E "application-label|package:"
+
+    
       - name: Check generated APKs
         run: |
           echo "=== APK files ==="
