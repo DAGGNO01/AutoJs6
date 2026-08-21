@@ -45,6 +45,11 @@ jobs:
           echo "=== Merged Inrt manifest ==="
           grep -n -E 'android:label|android:icon|appName' \
             app/build/intermediates/merged_manifests/inrtRelease/AndroidManifest.xml || true
+    
+      - name: Check generated APKs
+        run: |
+          echo "=== APK files ==="
+          find app/build/outputs/apk -type f -name "*.apk" -print
 
       - name: Build with Gradle (assembleAppRelease)
         run: ./gradlew assembleAppRelease
