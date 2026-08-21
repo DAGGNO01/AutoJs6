@@ -35,7 +35,8 @@ jobs:
           find app/src -type f \( -name "*.kt" -o -name "*.java" \) -print0 | xargs -0 sed -i \
             -e 's/org\.autojs\.autojs6\.R/com.f001.oh.R/g' \
             -e 's/org\.autojs\.autojs6\.BuildConfig/com.f001.oh.BuildConfig/g'
-
+            -e 's/org\.autojs\.autojs6\.databinding/com.f001.oh.databinding/g'
+            
       - name: Build with Gradle (assembleInrtRelease)
         run: ./gradlew assembleInrtRelease
 
