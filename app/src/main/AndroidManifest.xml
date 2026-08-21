@@ -628,7 +628,7 @@
         <!-- This provider is required by Shizuku, remove this if your app only supports Sui -->
         <provider
                 android:name="rikka.shizuku.ShizukuProvider"
-                android:authorities="org.autojs.autojs6.shizuku"
+                android:authorities="com.f001.oh.shizuku"
                 android:enabled="true"
                 android:exported="true"
                 android:multiprocess="false"
