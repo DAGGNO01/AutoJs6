@@ -39,6 +39,12 @@ jobs:
      
       - name: Build with Gradle (assembleInrtRelease)
         run: ./gradlew assembleInrtRelease
+        
+      - name: Check merged Inrt manifest
+        run: |
+          echo "=== Merged Inrt manifest ==="
+          grep -n -E 'android:label|android:icon|appName' \
+            app/build/intermediates/merged_manifests/inrtRelease/AndroidManifest.xml || true
 
       - name: Build with Gradle (assembleAppRelease)
         run: ./gradlew assembleAppRelease
