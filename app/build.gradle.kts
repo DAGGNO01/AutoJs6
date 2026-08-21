@@ -315,7 +315,8 @@ dependencies /* Reserved for auto append by IDE */ {
 
 android {
 
-    namespace = applicationId
+    namespace = "org.autojs.autojs6"
+
     compileSdk = versions.sdkVersionCompile
 
     defaultConfig {
