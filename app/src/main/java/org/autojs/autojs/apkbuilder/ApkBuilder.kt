@@ -19,7 +19,7 @@ import org.autojs.autojs.script.EncryptedScriptFileHeader.writeHeader
 import org.autojs.autojs.script.JavaScriptFileSource
 import org.autojs.autojs.util.MD5Utils
 import com.f001.oh.BuildConfig
-import com.f001.oh.autojs6.R
+import com.f001.oh.R
 import pxb.android.StringItem
 import pxb.android.axml.AxmlWriter
 import zhao.arsceditor.ResDecoder.ARSCDecoder
